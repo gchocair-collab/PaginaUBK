@@ -437,72 +437,85 @@
     </div>
 
     <!-- Botón Whatsapp Flotante -->
-    <a href="#" class="fixed bottom-8 right-8 bg-[#25D366] hover:bg-[#1faa53] text-white p-4 rounded-full shadow-[0_0_20px_rgba(37,211,102,0.5)] transition-all z-50 hover:scale-110 flex items-center justify-center w-14 h-14">
+    <!-- ACTUALIZADO: Enlace directo a tu número -->
+    <a href="https://wa.me/56942102138" target="_blank" class="fixed bottom-8 right-8 bg-[#25D366] hover:bg-[#1faa53] text-white p-4 rounded-full shadow-[0_0_20px_rgba(37,211,102,0.5)] transition-all z-50 hover:scale-110 flex items-center justify-center w-14 h-14">
         <i class="fab fa-whatsapp text-3xl"></i>
     </a>
 
-    <!-- Toast Notification -->
+    <!-- Toast Notification (Opcional, se mantiene por si usas el formulario de trabajo) -->
     <div id="toast" class="fixed bottom-10 left-1/2 transform -translate-x-1/2 bg-white text-black px-8 py-4 shadow-2xl z-[70] translate-y-40 transition-all duration-300 flex items-center gap-4 border-l-4 border-ubk-gold">
         <i class="fas fa-check-circle text-green-600 text-xl"></i>
         <div>
-            <h4 class="font-bold uppercase text-sm" id="toast-title">Carrito Actualizado</h4>
-            <span id="toast-message" class="text-sm text-gray-600">Producto agregado</span>
+            <h4 class="font-bold uppercase text-sm" id="toast-title">Notificación</h4>
+            <span id="toast-message" class="text-sm text-gray-600">Mensaje enviado</span>
         </div>
     </div>
 
     <script>
         // --- CONFIGURACIÓN 2026 ---
-        // Asignamos tus imágenes locales a cada producto
         const designs = [
-    { 
-        name: "Snoopy Fly Away", 
-        price: 58,
-        images: {
-            black: { front: "FOTOS/SNOOPY1BF.jpg", back: "FOTOS/SNOOPY1BB.jpg" },
-            white: { front: "FOTOS/SNOOPY1WF.jpg", back: "FOTOS/SNOOPY1WB.jpg" }
-        }
-    },
-    // Asegúrate de actualizar los nombres de los archivos según como los guardaste
-];
+            { 
+                name: "Snoopy Fly Away", 
+                // PRECIOS ACTUALIZADOS (Negra 19.990 / Blanca 17.990)
+                prices: {
+                    black: 19990,
+                    white: 17990
+                },
+                images: {
+                    black: { front: "FOTOS/SNOOPY1BF.jpg", back: "FOTOS/SNOOPY1BB.jpg" },
+                    white: { front: "FOTOS/SNOOPY1WF.jpg", back: "FOTOS/SNOOPY1WB.jpg" }
+                }
+            },
+            // Aquí puedes agregar más productos siguiendo el mismo formato de 'prices' y 'images'
+        ];
 
         function createProductCard(design, index) {
-    const pId = `prod-${index}`;
-    return `
-        <div class="product-card group bg-ubk-gray rounded-sm overflow-hidden border border-gray-800 hover:border-ubk-gold transition-all duration-300 relative card-shadow">
+            const pId = `prod-${index}`;
+            // Formato de precio chileno
+            const formattedPrice = design.prices.black.toLocaleString('es-CL');
             
-            <div class="flex h-64 bg-black border-b border-gray-800">
-                <div class="w-1/2 border-r border-gray-900 p-2 flex items-center justify-center bg-[#111]">
-                    <img id="${pId}-front" src="${design.images.black.front}" class="max-h-full object-contain transition-opacity duration-300" alt="Frente">
-                </div>
-                <div class="w-1/2 p-2 flex items-center justify-center bg-[#111]">
-                    <img id="${pId}-back" src="${design.images.black.back}" class="max-h-full object-contain transition-opacity duration-300" alt="Espalda">
-                </div>
-            </div>
+            // Mensaje de WhatsApp personalizado
+            const whatsappMsg = `Hola UBK, me interesa la polera ${design.name} en color NEGRO.`;
+            const whatsappLink = `https://wa.me/56942102138?text=${encodeURIComponent(whatsappMsg)}`;
 
-            <div class="p-5 bg-[#151515]">
-                <div class="flex justify-between items-start mb-4">
-                    <h4 class="font-bold text-white uppercase tracking-tighter">${design.name}</h4>
-                    <span class="text-ubk-gold font-black">$${design.price}</span>
-                </div>
-                
-                <div class="flex gap-4 mb-5">
-                    <button onclick="updateColor('${pId}', 'black', ${index})" class="w-8 h-8 rounded-full bg-black border-2 border-ubk-gold active:scale-90 transition-transform shadow-lg"></button>
-                    <button onclick="updateColor('${pId}', 'white', ${index})" class="w-8 h-8 rounded-full bg-white border-2 border-gray-600 active:scale-90 transition-transform shadow-lg"></button>
-                </div>
+            return `
+                <div class="product-card group bg-ubk-gray rounded-sm overflow-hidden border border-gray-800 hover:border-ubk-gold transition-all duration-300 relative card-shadow">
+                    
+                    <div class="flex h-64 bg-black border-b border-gray-800">
+                        <div class="w-1/2 border-r border-gray-900 p-2 flex items-center justify-center bg-[#111]">
+                            <img id="${pId}-front" src="${design.images.black.front}" class="max-h-full object-contain transition-opacity duration-300" alt="Frente">
+                        </div>
+                        <div class="w-1/2 p-2 flex items-center justify-center bg-[#111]">
+                            <img id="${pId}-back" src="${design.images.black.back}" class="max-h-full object-contain transition-opacity duration-300" alt="Espalda">
+                        </div>
+                    </div>
 
-                <button onclick="addToCart('${design.name}')" class="w-full py-3 bg-ubk-gold text-black font-bold text-xs uppercase hover:bg-white transition-colors">
-                    AGREGAR AL CARRITO
-                </button>
-            </div>
-        </div>
-    `;
-} 
+                    <div class="p-5 bg-[#151515]">
+                        <div class="flex justify-between items-start mb-4">
+                            <h4 class="font-bold text-white uppercase tracking-tighter">${design.name}</h4>
+                            <!-- ID dinámico para actualizar el precio -->
+                            <span id="price-${index}" class="text-ubk-gold font-black text-xl">$${formattedPrice}</span>
+                        </div>
+                        
+                        <div class="flex gap-4 mb-5">
+                            <button onclick="updateColor('${pId}', 'black', ${index})" class="w-8 h-8 rounded-full bg-black border-2 border-ubk-gold active:scale-90 transition-transform shadow-lg"></button>
+                            <button onclick="updateColor('${pId}', 'white', ${index})" class="w-8 h-8 rounded-full bg-white border-2 border-gray-600 active:scale-90 transition-transform shadow-lg"></button>
+                        </div>
+
+                        <!-- BOTÓN WHATSAPP -->
+                        <a id="btn-${index}" href="${whatsappLink}" target="_blank" class="w-full py-3 bg-[#25D366] text-white font-bold text-xs uppercase hover:bg-[#1faa53] transition-colors flex items-center justify-center gap-2 rounded-sm shadow-md hover:shadow-green-500/20">
+                            <i class="fab fa-whatsapp text-lg"></i> COTIZAR EN WHATSAPP
+                        </a>
+                    </div>
+                </div>
+            `;
+        }
 
         function initCatalog() {
             const grid = document.getElementById('product-grid');
             const initialProducts = designs.slice(0, 6); 
             grid.innerHTML = initialProducts.map((d, i) => createProductCard(d, i)).join('');
-            document.getElementById('item-count').innerText = `Mostrando 6 de ${designs.length}`;
+            document.getElementById('item-count').innerText = `Mostrando ${initialProducts.length} de ${designs.length}`;
         }
 
         function loadFullCatalog() {
@@ -519,6 +532,35 @@
             buttonContainer.innerHTML = '<p class="text-gray-500 italic mt-8">Colección Vol. 1 Completamente Cargada.</p>';
         }
 
+        // --- FUNCIONES LÓGICAS ---
+
+        function updateColor(pId, color, idx) {
+            const d = designs[idx];
+            const front = document.getElementById(`${pId}-front`);
+            const back = document.getElementById(`${pId}-back`);
+            const priceEl = document.getElementById(`price-${idx}`);
+            const btnEl = document.getElementById(`btn-${idx}`);
+            
+            // 1. Cambiamos las imágenes
+            front.src = d.images[color].front;
+            back.src = d.images[color].back;
+            
+            // 2. Efecto de parpadeo
+            [front, back].forEach(img => {
+                img.style.opacity = '0.5';
+                setTimeout(() => img.style.opacity = '1', 150);
+            });
+
+            // 3. ACTUALIZAR PRECIO (CLP)
+            const newPrice = d.prices[color];
+            priceEl.innerText = '$' + newPrice.toLocaleString('es-CL');
+
+            // 4. ACTUALIZAR ENLACE DE WHATSAPP CON EL COLOR SELECCIONADO
+            const colorName = color === 'black' ? 'NEGRO' : 'BLANCO';
+            const whatsappMsg = `Hola UBK, me interesa la polera ${d.name} en color ${colorName} (Valor: $${newPrice.toLocaleString('es-CL')}).`;
+            btnEl.href = `https://wa.me/56942102138?text=${encodeURIComponent(whatsappMsg)}`;
+        }
+
         // --- SISTEMA DE MODALES Y FORMULARIOS ---
 
         function openModal(modalId) {
@@ -529,7 +571,6 @@
         function closeModal(modalId) {
             document.getElementById(modalId).classList.add('hidden');
             document.getElementById(modalId).classList.remove('flex');
-            // Reset forms if needed
             if(modalId === 'trackingModal') {
                 document.getElementById('tracking-result').classList.add('hidden');
                 document.querySelector('#trackingModal form').reset();
@@ -541,7 +582,6 @@
             const btn = e.target.querySelector('button');
             const originalText = btn.innerText;
             btn.innerText = 'BUSCANDO...';
-            
             setTimeout(() => {
                 document.getElementById('tracking-result').classList.remove('hidden');
                 btn.innerText = originalText;
@@ -572,10 +612,6 @@
             document.getElementById('mobile-menu').classList.toggle('hidden');
         }
 
-        function addToCart(name) {
-            showToast('Carrito Actualizado', `${name} añadido al Vol. 1 Bag.`);
-        }
-
         function showToast(title, message) {
             const toast = document.getElementById('toast');
             document.getElementById('toast-title').innerText = title;
@@ -589,22 +625,6 @@
 
         // Iniciar
         initCatalog();
-
-    function updateColor(pId, color, idx) {
-    const d = designs[idx];
-    const front = document.getElementById(`${pId}-front`);
-    const back = document.getElementById(`${pId}-back`);
-    
-    // Cambiamos las rutas
-    front.src = d.images[color].front;
-    back.src = d.images[color].back;
-    
-    // Pequeño efecto de parpadeo al cambiar
-    [front, back].forEach(img => {
-        img.style.opacity = '0.5';
-        setTimeout(() => img.style.opacity = '1', 150);
-    });
-}
-</script>
+    </script>
 </body>
 </html>
