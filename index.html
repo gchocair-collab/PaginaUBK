@@ -134,7 +134,7 @@
                         <a href="#inicio" class="text-white hover:text-ubk-gold px-3 py-2 text-sm font-bold tracking-[0.2em] transition-colors drop-shadow-md">INICIO</a>
                         <a href="#catalogo" class="bg-ubk-gold text-black px-6 py-2 rounded-sm text-sm font-bold tracking-[0.2em] hover:bg-white hover:shadow-[0_0_15px_rgba(255,255,255,0.5)] transition-all shadow-lg">CATÁLOGO</a>
                         <a href="#quienes-somos" class="text-white hover:text-ubk-gold px-3 py-2 text-sm font-bold tracking-[0.2em] transition-colors drop-shadow-md">NOSOTROS</a>
-                        <a href="#contacto" class="text-white hover:text-ubk-gold px-3 py-2 text-sm font-bold tracking-[0.2em] transition-colors drop-shadow-md">CONTACTO</a>
+                       <!-- <a href="#contacto" class="text-white hover:text-ubk-gold px-3 py-2 text-sm font-bold tracking-[0.2em] transition-colors drop-shadow-md">CONTACTO</a> -->
                     </div>
                 </div>
 
@@ -166,7 +166,7 @@
 
         <div class="relative z-10 text-center px-4 max-w-6xl mx-auto mt-20">
             <div class="inline-block border border-ubk-gold/50 bg-black/60 backdrop-blur-sm px-6 py-2 mb-6 rounded-full fade-in-element shadow-xl">
-                <p class="text-ubk-gold font-bold tracking-[0.4em] text-xs md:text-sm">COLECCIÓN 2026 / VOL. 1</p>
+                <p class="text-ubk-gold font-bold tracking-[0.4em] text-xs md:text-sm">COLECCIÓN 2026 / VOL. Lanzamiento</p>
             </div>
             
             <h2 class="font-graffiti text-7xl md:text-9xl text-white mb-4 drop-shadow-[0_5px_5px_rgba(0,0,0,0.8)] fade-in-element" style="animation-delay: 0.2s;">
@@ -181,11 +181,8 @@
             
             <div class="flex flex-col sm:flex-row justify-center gap-6 fade-in-element" style="animation-delay: 0.6s;">
                 <a href="#catalogo" class="group relative px-8 py-4 bg-ubk-gold text-black font-black uppercase tracking-wider overflow-hidden shadow-lg hover:shadow-ubk-gold/50 transition-all">
-                    <span class="relative z-10 group-hover:text-white transition-colors">Ver Lanzamiento Vol. 1</span>
+                    <span class="relative z-10 group-hover:text-white transition-colors">Ver Vol. Lanzamiento </span>
                     <div class="absolute inset-0 bg-black transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300"></div>
-                </a>
-                <a href="#" onclick="openModal('workModal')" class="px-8 py-4 border-2 border-white bg-black/30 backdrop-blur-sm text-white font-bold uppercase tracking-wider hover:bg-white hover:text-black transition-all shadow-lg">
-                    Trabaja con Nosotros
                 </a>
             </div>
         </div>
@@ -207,7 +204,7 @@
                     <h3 class="font-graffiti text-5xl md:text-6xl text-white mb-2">
                         CATÁLOGO <span class="text-ubk-gold">2026</span>
                     </h3>
-                    <p class="text-gray-400">Volumen 1 / Street Wear / Primera Edición</p>
+                    <p class="text-gray-400">Lanzamiento / Street Wear / Primera Edición</p>
                 </div>
                 <div class="hidden md:block text-right">
                     <p class="text-ubk-gold font-bold text-2xl" id="item-count">0 items</p>
@@ -221,9 +218,6 @@
             
             <!-- Botón Ver Más -->
             <div class="text-center mt-20" id="load-more-container">
-                <button onclick="loadFullCatalog()" class="px-12 py-5 border border-ubk-gold text-ubk-gold font-bold tracking-widest hover:bg-ubk-gold hover:text-black transition-all duration-300 shadow-[0_0_20px_rgba(212,175,55,0.2)]">
-                    VER CATÁLOGO COMPLETO <i class="fas fa-plus ml-2"></i>
-                </button>
             </div>
         </div>
     </section>
@@ -251,7 +245,7 @@
                     Este 2026 marca el inicio de una era. Urban Kin (UBK) surge como la respuesta a la monotonía. Somos la primera línea de defensa contra el estilo aburrido.
                 </p>
                 <p class="text-gray-400 text-lg mb-8 leading-relaxed">
-                    Nuestra colección Volumen 1 es solo el principio. Únete a la familia ahora y sé parte de la historia desde el día uno.
+                    Nuestra colección de Lanzamiento es solo el principio. Únete a la familia ahora y sé parte de la historia desde el día uno.
                 </p>
                 <div class="grid grid-cols-2 gap-6">
                     <div class="bg-ubk-gray p-4 border-l-4 border-ubk-gold">
@@ -261,7 +255,7 @@
                     </div>
                     <div class="bg-ubk-gray p-4 border-l-4 border-ubk-gold">
                         <i class="fas fa-certificate text-2xl text-white mb-2"></i>
-                        <h5 class="font-bold text-white">VOLUMEN 1</h5>
+                        <h5 class="font-bold text-white">VOL. Lanzamiento</h5>
                         <p class="text-xs text-gray-500">Edición Fundadores</p>
                     </div>
                 </div>
@@ -292,13 +286,13 @@
                     <ul class="space-y-4 text-gray-500">
                         <li><a href="#catalogo" class="hover:text-ubk-gold transition-colors">Catálogo Vol. 1</a></li>
                         <li><button onclick="openModal('sizeModal')" class="hover:text-ubk-gold transition-colors text-left w-full">Tabla de Tallas</button></li>
-                        <li><button onclick="openModal('trackingModal')" class="hover:text-ubk-gold transition-colors text-left w-full">Seguimiento de Orden</button></li>
-                        <li><button onclick="openModal('workModal')" class="hover:text-ubk-gold transition-colors text-left w-full">Trabaja con Nosotros</button></li>
+                        <!-- <li><button onclick="openModal('trackingModal')" class="hover:text-ubk-gold transition-colors text-left w-full">Seguimiento de Orden</button></li>-->
+                        <!-- <li><button onclick="openModal('workModal')" class="hover:text-ubk-gold transition-colors text-left w-full">Trabaja con Nosotros</button></li>-->
                     </ul>
                 </div>
 
                 <!-- Col 3 -->
-                <div>
+               <!-- <div>
                     <h4 class="text-white font-bold mb-6 tracking-widest">CONTACTO CORPORATIVO</h4>
                     <div class="bg-gray-900 p-6 rounded-lg border border-gray-800">
                         <p class="text-gray-400 mb-4 text-sm">Compras por mayor y contacto directo.</p>
@@ -308,7 +302,7 @@
                         <button onclick="openModal('workModal')" class="w-full mt-4 bg-ubk-gold text-black font-bold text-xs py-2 uppercase hover:bg-white transition-colors">
                             Zona Mayoristas
                         </button>
-                    </div>
+                    </div>-->
                 </div>
             </div>
             
@@ -327,7 +321,7 @@
             <button onclick="closeModal('sizeModal')" class="absolute top-4 right-4 text-gray-500 hover:text-white"><i class="fas fa-times text-xl"></i></button>
             
             <h3 class="font-graffiti text-3xl text-ubk-gold mb-6 text-center">GUÍA DE TALLAS (CM)</h3>
-            <p class="text-gray-400 text-center text-xs mb-6 uppercase tracking-widest">Corte Oversize 2026 Standard</p>
+            <p class="text-gray-400 text-center text-xs mb-6 uppercase tracking-widest">Corte 2026 Standard</p>
             
             <div class="overflow-x-auto">
                 <table class="w-full text-sm text-left text-gray-400">
@@ -336,33 +330,28 @@
                             <th class="px-6 py-3">Talla</th>
                             <th class="px-6 py-3">Ancho (Pecho)</th>
                             <th class="px-6 py-3">Largo</th>
-                            <th class="px-6 py-3">Manga</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr class="border-b border-gray-800 hover:bg-gray-800">
                             <td class="px-6 py-4 font-bold text-white">S</td>
-                            <td class="px-6 py-4">54</td>
-                            <td class="px-6 py-4">72</td>
-                            <td class="px-6 py-4">22</td>
+                            <td class="px-6 py-4">46</td>
+                            <td class="px-6 py-4">68</td>
                         </tr>
                         <tr class="border-b border-gray-800 hover:bg-gray-800">
                             <td class="px-6 py-4 font-bold text-white">M</td>
-                            <td class="px-6 py-4">57</td>
-                            <td class="px-6 py-4">74</td>
-                            <td class="px-6 py-4">23</td>
+                            <td class="px-6 py-4">51</td>
+                            <td class="px-6 py-4">73</td>
                         </tr>
                         <tr class="border-b border-gray-800 hover:bg-gray-800">
                             <td class="px-6 py-4 font-bold text-white">L</td>
-                            <td class="px-6 py-4">60</td>
-                            <td class="px-6 py-4">76</td>
-                            <td class="px-6 py-4">24</td>
+                            <td class="px-6 py-4">56</td>
+                            <td class="px-6 py-4">75</td>
                         </tr>
                         <tr class="hover:bg-gray-800">
                             <td class="px-6 py-4 font-bold text-white">XL</td>
-                            <td class="px-6 py-4">63</td>
-                            <td class="px-6 py-4">78</td>
-                            <td class="px-6 py-4">25</td>
+                            <td class="px-6 py-4">61</td>
+                            <td class="px-6 py-4">76</td>
                         </tr>
                     </tbody>
                 </table>
