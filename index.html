@@ -61,6 +61,14 @@
             transform: translateY(-5px);
         }
 
+        /* Gradiente Instagram para botones */
+        .bg-instagram {
+            background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%); 
+        }
+        .hover-instagram:hover {
+            background: linear-gradient(45deg, #bc1888 0%, #cc2366 25%, #dc2743 50%, #e6683c 75%, #f09433 100%);
+        }
+
         /* Animaciones */
         @keyframes fadeInUp {
             from { opacity: 0; transform: translateY(30px); }
@@ -275,7 +283,8 @@
                         Diseño urbano sin compromisos.
                     </p>
                     <div class="flex space-x-4">
-                        <a href="#" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center text-white hover:bg-ubk-gold hover:text-black transition-colors"><i class="fab fa-instagram"></i></a>
+                        <!-- Botón Instagram en Footer actualizado -->
+                        <a href="https://www.instagram.com/urbkin/" target="_blank" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center text-white hover:bg-ubk-gold hover:text-black transition-colors"><i class="fab fa-instagram"></i></a>
                         <a href="#" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center text-white hover:bg-ubk-gold hover:text-black transition-colors"><i class="fab fa-tiktok"></i></a>
                     </div>
                 </div>
@@ -425,13 +434,12 @@
         </div>
     </div>
 
-    <!-- Botón Whatsapp Flotante -->
-    <!-- ACTUALIZADO: Enlace directo a tu número -->
-    <a href="https://wa.me/56942102138" target="_blank" class="fixed bottom-8 right-8 bg-[#25D366] hover:bg-[#1faa53] text-white p-4 rounded-full shadow-[0_0_20px_rgba(37,211,102,0.5)] transition-all z-50 hover:scale-110 flex items-center justify-center w-14 h-14">
-        <i class="fab fa-whatsapp text-3xl"></i>
+    <!-- Botón INSTAGRAM Flotante (Reemplaza WhatsApp) -->
+    <a href="https://www.instagram.com/urbkin/" target="_blank" class="fixed bottom-8 right-8 bg-instagram text-white p-4 rounded-full shadow-[0_0_20px_rgba(220,39,67,0.5)] transition-all z-50 hover:scale-110 flex items-center justify-center w-14 h-14 hover-instagram">
+        <i class="fab fa-instagram text-3xl"></i>
     </a>
 
-    <!-- Toast Notification (Opcional, se mantiene por si usas el formulario de trabajo) -->
+    <!-- Toast Notification (Reutilizado para aviso de copiado) -->
     <div id="toast" class="fixed bottom-10 left-1/2 transform -translate-x-1/2 bg-white text-black px-8 py-4 shadow-2xl z-[70] translate-y-40 transition-all duration-300 flex items-center gap-4 border-l-4 border-ubk-gold">
         <i class="fas fa-check-circle text-green-600 text-xl"></i>
         <div>
@@ -523,10 +531,7 @@
             // Formato de precio chileno
             const formattedPrice = design.prices.black.toLocaleString('es-CL');
             
-            // Mensaje de WhatsApp personalizado
-            const whatsappMsg = `Hola UBK, me interesa la polera ${design.name} en color NEGRO.`;
-            const whatsappLink = `https://wa.me/56942102138?text=${encodeURIComponent(whatsappMsg)}`;
-
+            // NOTA: Usamos onclick en lugar de href para ejecutar el copiado antes de redirigir
             return `
                 <div class="product-card group bg-ubk-gray rounded-sm overflow-hidden border border-gray-800 hover:border-ubk-gold transition-all duration-300 relative card-shadow">
                     
@@ -551,10 +556,10 @@
                             <button onclick="updateColor('${pId}', 'white', ${index})" class="w-8 h-8 rounded-full bg-white border-2 border-gray-600 active:scale-90 transition-transform shadow-lg"></button>
                         </div>
 
-                        <!-- BOTÓN WHATSAPP -->
-                        <a id="btn-${index}" href="${whatsappLink}" target="_blank" class="w-full py-3 bg-[#25D366] text-white font-bold text-xs uppercase hover:bg-[#1faa53] transition-colors flex items-center justify-center gap-2 rounded-sm shadow-md hover:shadow-green-500/20">
-                            <i class="fab fa-whatsapp text-lg"></i> COTIZAR EN WHATSAPP
-                        </a>
+                        <!-- BOTÓN INSTAGRAM INTELIGENTE -->
+                        <button id="btn-${index}" onclick="goToInstagram(${index})" class="w-full py-3 bg-instagram hover-instagram text-white font-bold text-xs uppercase transition-colors flex items-center justify-center gap-2 rounded-sm shadow-md hover:shadow-pink-500/20 active:scale-95 duration-100">
+                            <i class="fab fa-instagram text-lg"></i> COTIZAR EN INSTAGRAM
+                        </button>
                     </div>
                 </div>
             `;
@@ -585,10 +590,13 @@
 
         function updateColor(pId, color, idx) {
             const d = designs[idx];
+            
+            // GUARDAR ESTADO DEL COLOR SELECCIONADO PARA EL MENSAJE
+            d.selectedColor = color;
+
             const front = document.getElementById(`${pId}-front`);
             const back = document.getElementById(`${pId}-back`);
             const priceEl = document.getElementById(`price-${idx}`);
-            const btnEl = document.getElementById(`btn-${idx}`);
             
             // 1. Cambiamos las imágenes
             front.src = d.images[color].front;
@@ -603,11 +611,34 @@
             // 3. ACTUALIZAR PRECIO (CLP)
             const newPrice = d.prices[color];
             priceEl.innerText = '$' + newPrice.toLocaleString('es-CL');
+        }
 
-            // 4. ACTUALIZAR ENLACE DE WHATSAPP CON EL COLOR SELECCIONADO
+        // --- FUNCIÓN DE COPIADO Y REDIRECCIÓN A INSTAGRAM ---
+        function goToInstagram(idx) {
+            const design = designs[idx];
+            // Si no se ha seleccionado color aún, asumimos negro por defecto
+            const color = design.selectedColor || 'black';
             const colorName = color === 'black' ? 'NEGRO' : 'BLANCO';
-            const whatsappMsg = `Hola UBK, me interesa la polera ${d.name} en color ${colorName} (Valor: $${newPrice.toLocaleString('es-CL')}).`;
-            btnEl.href = `https://wa.me/56942102138?text=${encodeURIComponent(whatsappMsg)}`;
+            const price = design.prices[color].toLocaleString('es-CL');
+            
+            // MENSAJE PRE-DISEÑADO
+            const textToCopy = `Hola UBK, me interesa la polera "${design.name}" en color ${colorName} (Valor: $${price}). Quedo atento/a.`;
+            
+            // Intentar copiar al portapapeles
+            navigator.clipboard.writeText(textToCopy).then(() => {
+                // Éxito: Mostrar notificación y abrir
+                showToast('¡MENSAJE COPIADO!', 'Pégalo en el chat de Instagram (Ctrl+V)');
+                
+                // Pequeño delay para que el usuario lea el toast
+                setTimeout(() => {
+                    // ig.me es un acortador oficial que intenta abrir Direct directamente
+                    window.open('https://ig.me/m/urbkin', '_blank');
+                }, 1500);
+            }).catch(err => {
+                // Fallback si falla el copiado (navegadores antiguos/seguridad)
+                console.error('Error al copiar: ', err);
+                window.open('https://ig.me/m/urbkin', '_blank');
+            });
         }
 
         // --- SISTEMA DE MODALES Y FORMULARIOS ---
@@ -669,7 +700,7 @@
             toast.classList.remove('translate-y-40');
             setTimeout(() => {
                 toast.classList.add('translate-y-40');
-            }, 3000);
+            }, 4000); // Aumenté un poco el tiempo para que lean
         }
 
         // Iniciar
